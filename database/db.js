@@ -1,5 +1,5 @@
+
 const sqlite3 = require('sqlite3').verbose();
-const bcrypt = require('bcrypt');
 
 // Connect to SQLite database
 const db = new sqlite3.Database('./users.db', (err) => {
@@ -11,7 +11,7 @@ const db = new sqlite3.Database('./users.db', (err) => {
     }
 });
 
-// Initialize the database with tables
+// Create users table if it does not exist
 function initializeDatabase() {
     db.run(`
         CREATE TABLE IF NOT EXISTS users (
@@ -27,4 +27,6 @@ function initializeDatabase() {
     });
 }
 
+// Export database connection for server.js
 module.exports = db;
+
